@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landscapes</title>
+    <link rel="icon" href="https://img.icons8.com/bubbles/50/000000/learning.png" type="image/icon type">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
+
+    </script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='CS/styles.css') }}">
+    <!-- <link rel="stylesheet" type='text/css'href="../static/CS/styles.css"> -->
+
+    <!--Google Fonts CDN-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat&family=PT+Serif:wght@700&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+            background-color: #c0cee4;
+            background-image: linear-gradient(315deg, #a9bedd 0%, #f5f7fa 74%);
+            border: 1px solid gray;
+
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        h1 {
+
+            font-family: 'PT Serif', serif;
+            text-align: left;
+            text-decoration: underline;
+            text-decoration-thickness: 55px;
+            text-underline-position: below;
+            text-decoration-color: #900d0d;
+            font-size: 4rem;
+            letter-spacing: 0.3rem;
+            color: #251f44;
+        }
+
+        h3 {
+            text-align: left;
+            color: rgba(61, 61, 61, 1.0);
+            font-size: 2.5rem;
+            margin-top: 40px;
+            font-family: 'Source Sans Pro', sans-serif;
+            border-left: 6px solid grey;
+            padding-left: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            font-family: 'PT Serif', serif;
+            font-size: 3rem;
+            color: rgba(72, 84, 96, 1.0);
+            margin-bottom: 20px;
+        }
+
+        .btn-lg {
+            box-shadow: 5px 2px 7px #17a2b8;
+            margin-top: 20px;
+            width: 170px;
+            height: 50px;
+        }
+
+        .box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .box p {
+            display: none;
+            position: absolute;
+            left: 40px;
+            top: 20px;
+            color: black;
+            font-size: 35px;
+        }
+
+        @media (max-width:500px) and (min-width: 100px) {
+            .box p {
+                left: 60px;
+            }
+        }
+
+        .box:hover {
+            opacity: 0.5;
+        }
+
+        .box:hover p {
+            display: inline;
+        }
+
+        .forms {
+            text-align: center;
+        }
+
+        .first-cont-img {
+            border: 1px solid grey;
+            border-radius: 25%;
+            width: 300px;
+            height: 300px;
+        }
+
+        @media (min-width: 100px) and (max-width: 500px) {
+            .first-cont-img {
+                border: 1px solid grey;
+                border-radius: 25%;
+                width: 250px;
+                height: 250px;
+                margin: 20px;
+            }
+
+            .graph {
+                width: 100vw;
+                height: 100vh;
+            }
+
+
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, .3);
+            border-bottom: 1px solid rgba(0, 0, 0, .08);
+            margin: 2.5em 0;
+            position: relative;
+        }
+
+        hr:before,
+        hr:after {
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            height: 5em;
+            width: 100%;
+            background: radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: 0;
+        }
+
+        hr:after {
+            top: 0px;
+            bottom: auto;
+            height: 1.5em;
+            background: radial-gradient(ellipse at top, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+    </style>
+</head>
+
+<body>
+    <!--                                Landscape Prediction        -->
+    <div class="container-fluid col-lg-12">
+        <h2>LandScape prediction</h2>
+        <div class='row'>
+            <div class='col-lg-1'></div>
+            <div class='col-lg-3 box'>
+
+                <img class='first-cont-img' style="width:300px;height:300px;"
+                    src="https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
+                    alt="">
+                <p>Buildings</p>
+            </div>
+            <div class='col-lg-1'></div>
+            <div class='col-lg-3  box'>
+
+                <img class='first-cont-img' style="width:300px;height:300px;"
+                    src="https://images.unsplash.com/photo-1443890923422-7819ed4101c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+                    alt="">
+                <p>Mountain</p>
+            </div>
+            <div class='col-lg-1'></div>
+            <div class='col-lg-3 box'>
+
+                <img class='first-cont-img' style="width:300px;height:300px;"
+                    src="https://images.unsplash.com/photo-1493329025335-18542a61595f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
+                    alt="">
+                <p>Glacier</p>
+            </div>
+
+        </div>
+        <div class='row'>
+            <div class='col-lg-1'></div>
+            <div class='col-lg-3 box'>
+
+                <img class='first-cont-img' style="width:300px;height:300px;"
+                    src="https://images.unsplash.com/photo-1516214104703-d870798883c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=600"
+                    alt="">
+                <p style="color: white;">Forest</p>
+            </div>
+            <div class='col-lg-1'></div>
+            <div class='col-lg-3  box'>
+
+                <img class='first-cont-img' style="width:300px;height:300px;"
+                    src="https://images.unsplash.com/photo-1439405326854-014607f694d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+                    alt="">
+                <p>Sea</p>
+            </div>
+            <div class='col-lg-1'></div>
+            <div class='col-lg-3 box'>
+                <img class='first-cont-img' style="width:300px;height:300px;"
+                    src="https://images.unsplash.com/photo-1581321825690-944511645947?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
+                    alt="">
+                <p style="color: white;">Street</p>
+            </div>
+
+        </div>
+
+        <div class='row'>
+            <div class='col-lg-5 col-md-12 col-sm-12 col-xs-12'></div>
+            <div class='col-lg-4 col-md-12 col-sm-12 col-xs-12' style="text-align: center;">
+                <img class='first-cont-img' style="width:300px;height:300px;" src={{cdlink}} alt="">
+                <h4 style="text-align: center;text-decoration:underline ;text-decoration-color: brown;text-decoration-thickness: 10px;font-size: 2rem;">Inserted Image</h4>
+            </div>
+            <div class='col-lg-3  col-md-12 col-sm-12 col-xs-12'></div>
+        </div>
+        <div class='row'>
+            <div class='col-lg-2 col-sm-12 col-xs-12 col-md-12'></div>
+            <div class='col-lg-8 col-sm-12 col-xs-12 col-md-12 graph' style="height: 350px;">
+                <canvas id="myChart1"></canvas>
+            </div>
+            <div class='col-lg-2 col-sm-12 col-xs-12 col-md-12'></div>
+        </div>
+
+        <script type="text/javascript">
+
+
+
+            var ctx = document.getElementById('myChart1').getContext('2d');
+
+            Chart.defaults.global.defaultFontSize = 18;
+            Chart.defaults.global.elements.point.pointStyle = 'line';
+            Chart.defaults.global.defaultFontColor = 'rgba(109, 33, 79,1.0)';
+
+            var myChart1 = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: ['Buldings', 'Forest', 'Glaciers', 'Mountains', 'Sea', 'Street'],
+                    fontSize: 14,
+                    datasets: [{
+                        label: 'Prediction',
+                        data: {{ X }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                hoverBackgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)'
+                ],
+                hoverBorderWidth: 3,
+                fontColor: 'rgba(109, 33, 79,1.0)'
+            }]
+                              },
+            options: {
+                tooltips: {
+                    backgroundColor: 'rgba(0,0,0,0.3)',
+                        mode: 'point'
+
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                    }],
+                        yAxes: [{
+                            categoryPercentage: 0.8,
+                            barPercentage: 0.6
+                        }]
+                }
+            }
+                            });
+        </script>
+
+</body>
+
+</html>
