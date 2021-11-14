@@ -64,8 +64,8 @@ def infer(model, fnImg):
     batch = Batch(None, [img])
     (recognized, probability) = model.inferBatch(batch, True)
     print('Recognized:', '"' + recognized[0].replace(" ", "") + '"')
-    with open("f.txt", "w") as f:
-        f.write(recognized[0].replace(" ", ""))
+    # with open("f.txt", "w") as f:
+    #     f.write(recognized[0].replace(" ", ""))
     print('Probability:', probability[0])
     return recognized[0].replace(" ", "")
 
