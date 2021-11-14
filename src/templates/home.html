@@ -23,10 +23,10 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
-    </script>
+        </script>
 
     <title>Text Recognizer</title>
     <link rel="icon" href="https://img.icons8.com/bubbles/50/000000/learning.png" type="image/icon type">
@@ -34,7 +34,7 @@
         * {
             padding: 0;
             margin: 0;
-            box-sizing: border-box;
+            /* box-sizing: border-box; */
         }
 
 
@@ -45,6 +45,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            
         }
 
         .container1.night {
@@ -192,9 +193,9 @@
     </style>
 </head>
 
-<body>
+<body >
 
-    <div class="container1 night-mode-available" style="margin-top: 10px;">
+    <div class="container1 night-mode-available" style="height: 100%;">
         <br>
         <div class='container col-lg-12 '>
 
@@ -205,7 +206,7 @@
                     <div style=" border-bottom: 5px solid transparent;
               border-image: linear-gradient(to right, #7228fe  0%,#7228fe  60%, #4ea2f5 61%, #4ea2f5 100%);
               border-image-slice: 1;width: 450px;">
-   
+
                         <h1>Text Recognizer</h1>
                     </div>
 
@@ -226,7 +227,23 @@
                 </div>
 
                 <div class="container-fluid col-lg-12" >
-                    <br>
+            
+
+                    <div class="container row">
+                        <div class="col-lg-4"></div>
+                        <div class="night-mode-button col-lg-4" style="margin-left: 150px;padding: 25px;">
+                            <input type="checkbox" class="checkbox" id="night-mode">
+                            <label for="night-mode" class="label">
+                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-sun"></i>
+                                <div class="blob"></div>
+                            </label>
+                        </div>
+                        <div class="col-lg-4"></div>
+                    </div>
+
+
+
                     <h1 style="text-align: center;">Hindi Text prediction from image</h1>
                     <br>
                     <div class='row'>
@@ -240,54 +257,45 @@
                                     {{ form.submit(class='btn btn-info btn-lg') }}
                                 </div>
                             </form>
-                          
-                        </div>
+                            {% if X!='' %}
+
+                            <div class='row' id="over">
+                                <img class='first-cont-img' src="{{ url_for('static', filename = 'uploads/images/'+cdlink) }}" alt="">
+                            </div>
+                        
+                            <h3 style="text-align: center;">{{X}}</h3>
+                        
+                            {% endif %}
+                          </div>
                         <div class='col-lg-4'></div>
                     </div>
-            
-            
                 </div>
-
-
             </div>
-            <div class="container row">
-                <div class="col-lg-4"></div>
-                <div class="night-mode-button col-lg-4" style="margin-left: 150px;padding: 25px;">
-                    <input type="checkbox" class="checkbox" id="night-mode">
-                    <label for="night-mode" class="label">
-                        <i class="fas fa-moon"></i>
-                        <i class="fas fa-sun"></i>
-                        <div class="blob"></div>
-                    </label>
-                </div>
-                <div class="col-lg-4"></div>
-            </div>
-
         </div>
     </div>
-    
-    <br>
-    <script type="text/javascript">
-        document.querySelector('.checkbox').addEventListener('change', () => {
-            document.querySelectorAll('.night-mode-available').forEach(ele => {
-                ele.classList.toggle('night');
-            })
-        });
-    </script>
 
-    {% if X!='' %}
-            
+   
+
+    <!-- {% if X!='' %}
+
     <div class='row' id="over">
         <img class='first-cont-img' src="{{ url_for('static', filename = 'uploads/images/'+cdlink) }}" alt="">
     </div>
 
     <h3 style="text-align: center;">{{X}}</h3>
 
-    {% endif %}
-   
+    {% endif %} -->
 
 
- 
+    <script type="text/javascript">
+        document.querySelector('.checkbox').addEventListener('change', () => {
+            document.querySelectorAll('.night-mode-available').forEach(ele => {
+                ele.classList.toggle('night');
+                {{status}}=1;
+            })
+        });
+    </script>
+
 
 </body>
 
